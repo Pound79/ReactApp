@@ -7,7 +7,10 @@ import { AppBar,Toolbar, Avatar, Card, CardContent, Button, Dialog, DialogTitle,
 import { Email } from '@material-ui/icons'
 import withWidth from '@material-ui/core/withWidth'
 import { orange } from '@material-ui/core/colors'
+import { hot } from 'react-hot-loader'
 
+// https://github.com/gaearon/react-hot-loader/issues/905
+@hot(module)
 // connectのdecorator
 @connect(
   // propsに受け取るreducerのstate
@@ -75,7 +78,7 @@ export default class App extends React.Component {
                 <p style={{margin:10, color:primary[500]}}>{'名前:' + user.name.first + ' ' + user.name.last} </p>
                 <p style={{margin:10, color:secondary[500]}}>{'性別:' + (user.gender == 'male' ? '男性' : '女性')}</p>
                 <div style={{textAlign: 'right'}} >
-                  <Button variant="raised" color='secondary' onClick={() => this.handleClickOpen(user)}><Email style={{marginRight: 5, color: orange[200]}}/>Email</Button>
+                  <Button variant='raised' color='secondary' onClick={() => this.handleClickOpen(user)}><Email style={{marginRight: 5, color: orange[200]}}/>Email</Button>
                 </div>
               </CardContent>
             </Card>

@@ -16,6 +16,7 @@ const thunkWithClient = thunk.withExtraArgument(client)
 // redux-thunkをミドルウェアに適用
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunkWithClient)))
 
+
 // Material-UIテーマを上書きする
 const theme = createMuiTheme({
   // カラーパレット
@@ -86,12 +87,16 @@ const theme = createMuiTheme({
   },
 })
 
-ReactDOM.render(
-  // MuiThemeProviderにテーマの指定をする
-  <MuiThemeProvider theme={theme}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </MuiThemeProvider>,
-  document.getElementById('root')
-)
+const render = () => {
+  ReactDOM.render(
+    <MuiThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MuiThemeProvider>,
+    document.getElementById('root'),
+  )
+}
+
+render()
+
