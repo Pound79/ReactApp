@@ -5,20 +5,29 @@ import { Provider } from 'react-redux'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import client from 'axios'
 import thunk from 'redux-thunk'
+import createHistory from 'history/createBrowserHistory'
+// import { connectRouter, routerMiddleware } from 'react-router-redux'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 
 import App from './App'
-import reducer from './reducer'
+import reducer from './reducer/reducer'
 
 // redux-devtoolの設定
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+// ブラウザ履歴保存用のストレージを作成
+const history = createHistory()
 // axiosをthunkの追加引数に加える
 const thunkWithClient = thunk.withExtraArgument(client)
-// redux-thunkをミドルウェアに適用
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunkWithClient)))
+// redux-thunkをミドルウェアに適用、historyをミドルウェアに追加
+const store = createStore(connectRouter(history)(reducer), composeEnhancers(applyMiddleware(routerMiddleware(history),thunkWithClient)))
 
 
 // Material-UIテーマを上書きする
 const theme = createMuiTheme({
+  // https://material-ui.com/style/typography/#migration-to-typography-v2
+  typography: {
+    useNextVariants: true,
+  },
   // カラーパレット
   palette: {
     type: 'light',
@@ -72,7 +81,7 @@ const theme = createMuiTheme({
       'xs': 360, // スマホ用
       'sm': 768, // タブレット用
       'md': 992, // PC用
-      'lg': 1000000000, 
+      'lg': 1000000000,
       'xl': 1000000000,
     },
   },
@@ -91,7 +100,7 @@ const render = () => {
   ReactDOM.render(
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
-        <App />
+        <App history={history} />
       </Provider>
     </MuiThemeProvider>,
     document.getElementById('root'),
@@ -99,4 +108,3 @@ const render = () => {
 }
 
 render()
-

@@ -4,13 +4,14 @@ module.exports = {
   mode: 'development', // 開発モード
   devtool: 'cheap-module-source-map', // ソースマップファイル追加 
   entry: [
-    '@babel/polyfill', // 古いブラウザへの互換性をもたせる
+    '@babel/polyfill',
     'react-hot-loader/patch',
     __dirname + '/index', // エントリポイントのjsxファイル
   ],
   // React Hot Loader用のデバッグサーバ(webpack-dev-server)の設定
   devServer: {
     contentBase: __dirname, // index.htmlの格納場所
+    historyApiFallback: true, // history APIが404エラーを返す時、index.htmlに遷移（ブラウザリロード時など）
     inline: true, // ソース変更時リロードモード
     hot: true, // HMR(Hot Module Reload)モード
     port: 7070, // 起動ポート
@@ -27,7 +28,7 @@ module.exports = {
     rules: [{
       test: /\.js?$/, // 拡張子がjsで
       exclude: /node_modules/, // node_modulesフォルダ配下は除外
-      include: __dirname,// client配下のJSファイルが対象
+      include: __dirname, // client配下のJSファイルが対象
       use: {
         loader: 'babel-loader',
         options: {
@@ -37,8 +38,9 @@ module.exports = {
             ['@babel/plugin-proposal-class-properties', { loose: true }], // クラスのdefaultProps、アローファンクション用
             'react-hot-loader/babel', // react-hot-loader用
           ],
-        },
-      },
+        }
+      }
     }]
   }
 }
+

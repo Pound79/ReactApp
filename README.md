@@ -26,3 +26,10 @@ debugger;
 
 ## デバッグツール
 [React Developer Tools](React Developer Tools)
+
+# 注意点
+```
+"connected-react-router": "^4.5.0"
+```
+でないとエラーになる
+以降のバージョンで変更点に追従すれば動くだろうけどとりあえず保留
