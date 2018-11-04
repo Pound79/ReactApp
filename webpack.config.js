@@ -1,5 +1,5 @@
 module.exports = {
-  devtool: 'inline-source-map', // ソースマップファイル追加 
+  devtool: 'inline-source-map', // ソースマップファイル追加
   mode: 'development',
   entry: './index.js', // エントリポイントのjsxファイル
   output: {
