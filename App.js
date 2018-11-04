@@ -2,40 +2,92 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { load } from './user'
 
-// connect$B$N(Bdecorator
+import { withTheme, withStyles } from '@material-ui/core/styles'
+import { AppBar,Toolbar, Avatar, Card, CardContent, Button, Dialog, DialogTitle, DialogContent } from '@material-ui/core'
+import { Email } from '@material-ui/icons'
+import withWidth from '@material-ui/core/withWidth'
+import { orange } from '@material-ui/core/colors'
+
+// connectのdecorator
 @connect(
-  // props$B$K<u$1<h$k(Breducer$B$N(Bstate
+  // propsに受け取るreducerのstate
   state => ({
     users: state.user.users
   }),
-  // props$B$KIUM?$9$k(Bactions
+  // propsに付与するactions
   { load }
 )
+@withWidth()
+@withTheme()
+@withStyles({
+  root: {
+    fontStyle: 'italic',
+    fontSize: 21,
+    minHeight: 64,
+  }
+})
 export default class App extends React.Component {
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      open:false,
+      user:null,
+    }
+  }
+
   componentDidMount() {
-    // user$B<hF@(BAPI$B%3!<%k$N(Baction$B$r%-%C%/$9$k(B
+    // user取得APIコールのactionをキックする
     this.props.load()
   }
 
+  handleClickOpen (user) {
+    this.setState({
+      open: true,
+      user: user,
+    })
+  }
+
+  handleRequestClose () {
+    this.setState({ open: false })
+  }
+
   render () {
-    const { users } = this.props
-    // $B=i2s$O(Bnull$B$,JV$C$F$/$k!J(BinitialState$B!K!"=hM}40N;8e$K:FEY7k2L$,JV$C$F$/$k(B
+    const { users, theme, classes, width } = this.props
+    const { primary, secondary } = theme.palette
+
+    // 初回はnullが返ってくる（initialState）、処理完了後に再度結果が返ってくる
     console.log(users)
     return (
       <div>
-          {/* $BG[Ns7A<0$GJV5Q$5$l$k$?$a(Bmap$B$GE83+$9$k(B */}
-          {users && users.map((user) => {
-            return (
-                // $B%k!<%W$GE83+$9$kMWAG$K$O0l0U$J(Bkey$B$r$D$1$k!J(BReactJS$B$N7h$^$j;v!K(B
-                <div key={user.email}>
-                  <img src={user.picture.thumbnail} />
-                  <p>$BL>A0(B:{user.name.first + ' ' + user.name.last}</p>
-                  <p>$B@-JL(B:{user.gender}</p>
-                  <p>email:{user.email}</p>
+        <AppBar position="static" color="primary">
+          <Toolbar classes={{root: classes.root}} >
+            タイトル({ width === 'xs' ? 'スマホ' : 'PC'})
+          </Toolbar>
+        </AppBar>
+        {/* 配列形式で返却されるためmapで展開する */}
+        {users && users.map((user) => {
+          return (
+            // ループで展開する要素には一意なkeyをつける（ReactJSの決まり事）
+            <Card key={user.email} style={{marginTop:'10px'}}>
+              <CardContent style={{color:'#408040'}}>
+                <Avatar src={user.picture.thumbnail} />
+                <p style={{margin:10, color:primary[500]}}>{'名前:' + user.name.first + ' ' + user.name.last} </p>
+                <p style={{margin:10, color:secondary[500]}}>{'性別:' + (user.gender == 'male' ? '男性' : '女性')}</p>
+                <div style={{textAlign: 'right'}} >
+                  <Button variant="raised" color='secondary' onClick={() => this.handleClickOpen(user)}><Email style={{marginRight: 5, color: orange[200]}}/>Email</Button>
                 </div>
-            )
-          })}
+              </CardContent>
+            </Card>
+          )
+        })}
+        {
+          this.state.open &&
+          <Dialog open={this.state.open} onClose={() => this.handleRequestClose()}>
+            <DialogTitle>メールアドレス</DialogTitle>
+            <DialogContent>{this.state.user.email}</DialogContent>
+          </Dialog>
+        }
       </div>
     )
   }

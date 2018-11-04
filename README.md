@@ -1,8 +1,8 @@
 # webrtc_project
-$B4D6-9=C[$d%b%8%e!<%k$N%$%s%9%H!<%k$O0J2<$N;qNA$r;29M$K$7$F$$$^$9!#(B
+環境構築やモジュールのインストールは以下の資料を参考にしています。
 https://github.com/teradonburi/learnReactJS
 
-# $B%3%^%s%I(B
+# コマンド
 ## setup
 ```
 $ yarn install
@@ -13,16 +13,16 @@ $ yarn install
 $ yarn webpack
 ```
 
-## $B%=!<%9%U%!%$%kJQ99$r8!CN$7$F:F%S%k%I(B
+## ソースファイル変更を検知して再ビルド
 ```
 $ yarn webpack --watch
 ```
 
-# $B%G%P%C%0(B
-## $B%V%l!<%/%]%$%s%H(B
+# デバッグ
+## ブレークポイント
 ```
 debugger;
 ```
 
-## $B%G%P%C%0%D!<%k(B
+## デバッグツール
 [React Developer Tools](React Developer Tools)
