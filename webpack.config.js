@@ -14,6 +14,7 @@ module.exports = {
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react'], // env presetでES2015向けに変換、react presetでReactのJSX文法を変換
           plugins: [
+            ['@babel/plugin-proposal-decorators', { 'legacy': true }],
             ['@babel/plugin-proposal-class-properties', { loose: true }], // 追加
           ],
         }
