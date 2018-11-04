@@ -1,0 +1,8 @@
+{
+  "name": "webrtc_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:saucer-inc/webrtc_project.git",
+  "author": "Kanta Matsui <kma9879@gmail.com>",
+  "license": "MIT"
+}
