@@ -1,9 +1,13 @@
-# webrtc_project
+# ReactApp
 環境構築やモジュールのインストールは以下の資料を参考にしています。
+
 リリースビルドまでは完了。
+
 遅延レンダリング以降はまたあとで考える。
 
 https://github.com/teradonburi/learnReactJS
+
+とりあえずReactの開発が始められる状態のリポジトリ。
 
 # コマンド
 ## setup

@@ -1,8 +1,8 @@
 {
-  "name": "webrtc_project",
+  "name": "ReactApp",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:saucer-inc/webrtc_project.git",
+  "repository": "git@github.com:shioiyan/ReactApp.git",
   "author": "Kanta Matsui <kma9879@gmail.com>",
   "license": "MIT",
   "scripts": {
