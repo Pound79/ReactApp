@@ -1,32 +1,31 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {add} from '../reducer/user'
+import { connect } from 'react-redux'
+import { add } from '../reducer/user'
 
-import {withStyles} from '@material-ui/core/styles'
-import {AppBar, Toolbar, Card, Button, TextField} from '@material-ui/core'
-import {Field, reduxForm} from 'redux-form'
-import {error} from 'util'
+import { withStyles } from '@material-ui/core/styles'
+import { AppBar, Toolbar, Card, Button, TextField } from '@material-ui/core'
+import { Field, reduxForm } from 'redux-form'
+
 
 // テキストフォームフィールド
 const FormTextField = ({
-                           input,
-                           label,
-                           type,
-                           meta: {touched, error, warning}
-                       }) => {
+    input,
+    label,
+    type,
+    meta: { touched, error },
+}) => {
     const isError = !!(touched && error) // 一度でもフォーカスしたらtouchedがtrue
     return (
-        <TextField style={{margin: 5}} error={isError} label={label} helperText={isError ? error : null} {...input}
-                   type={type}/>
+        <TextField style={{margin: 5}} error={isError} label={label} helperText={isError ? error : null} {...input} type={type} />
     )
 }
 
 // connectのdecorator
 @connect(
     // propsに受け取るreducerのstate
-    state => ({}),
+    () => ({}),
     // propsに付与するactions
-    {add}
+    { add }
 )
 @reduxForm({
     form: 'syncValidation',
@@ -47,14 +46,14 @@ const FormTextField = ({
         }
 
         return errors
-    }
+    },
 })
 @withStyles({
     root: {
         fontStyle: 'italic',
         fontSize: 21,
         minHeight: 64,
-    }
+    },
 })
 export default class TodoPage extends React.Component {
 
@@ -72,39 +71,38 @@ export default class TodoPage extends React.Component {
             firstname: values.firstname,
             lastname: values.lastname,
             gender: values.gender || 'male',
-            email: values.email
+            email: values.email,
         }
         this.props.add(user).then(() => alert('送信完了')) // sendItemsメソッド内でthisを使えるようにbindする
     }
 
-    render() {
-        const {classes, handleSubmit, submitting} = this.props
+    render () {
+        const { classes, handleSubmit, submitting } = this.props
 
         return (
             <div>
                 <AppBar position="static" color="primary">
                     <Toolbar classes={{root: classes.root}}>
                         TODOページ
-                        <Button style={{color: '#fff', position: 'absolute', top: 15, right: 0}}
-                                onClick={() => this.handlePageMove('/')}>ユーザページへ</Button>
+                        <Button style={{color: '#fff', position: 'absolute', top: 15, right: 0}} onClick={() => this.handlePageMove('/')}>ユーザページへ</Button>
                     </Toolbar>
                 </AppBar>
                 <Card style={{padding: 10}}>
                     <form onSubmit={handleSubmit(this.sendItems)}>
-                        <Field name="firstname" type="text" component={FormTextField} label="姓"/>
-                        <Field name="lastname" type="text" component={FormTextField} label="名"/>
+                        <Field name="firstname" type="text" component={FormTextField} label="姓" />
+                        <Field name="lastname" type="text" component={FormTextField} label="名" />
                         <div style={{margin: 5}}>
                             <label style={{marginRight: 5}}>性別：</label>
                             <span>
-                <Field name="gender" component="select">
-                  <option value="male">男性</option>
-                  <option value="female">女性</option>
-                </Field>
-              </span>
+                                <Field name="gender" component="select">
+                                    <option value="male">男性</option>
+                                    <option value="female">女性</option>
+                                </Field>
+                            </span>
                         </div>
-                        <Field name="email" type="email" component={FormTextField} label="メールアドレス"/>
+                        <Field name="email" type="email" component={FormTextField} label="メールアドレス" />
                         <br/>
-                        <Button style={{marginTop: 10}} variant='contained' type="submit" disabled={submitting}>送信</Button>
+                        <Button style={{marginTop: 10}} variant='raised' type="submit" disabled={submitting}>送信</Button>
                     </form>
                 </Card>
             </div>

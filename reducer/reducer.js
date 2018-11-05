@@ -5,5 +5,5 @@ import user from './user'
 
 export default combineReducers({
     form: formReducer, // 追加
-    user
+    user,
 })

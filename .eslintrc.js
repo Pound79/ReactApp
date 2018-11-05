@@ -17,7 +17,7 @@ module.exports = {
     },
     'sourceType': 'module'
   },
-  'settings': { 
+  'settings': {
     'react': { 'version' : '16.5.2' }
   },
   // reactプラグイン使用
@@ -30,7 +30,7 @@ module.exports = {
     // インデントルール
     'indent': [
       'error',
-      2,
+      4,
       { 'SwitchCase': 1 }
     ],
     // 改行コード
