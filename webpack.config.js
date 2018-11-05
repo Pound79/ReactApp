@@ -35,7 +35,7 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: [precss, autoprefixer({browsers: ['last 2 versions']})],
-            }
+            },
         }),
     ],
     module: {

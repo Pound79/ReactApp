@@ -1,5 +1,7 @@
 # webrtc_project
 環境構築やモジュールのインストールは以下の資料を参考にしています。
+リリースビルドまでは完了。
+遅延レンダリング以降はまたあとで考える。
 
 https://github.com/teradonburi/learnReactJS
 
@@ -17,6 +19,16 @@ $ yarn webpack
 ## ソースファイル変更を検知して再ビルド
 ```
 $ yarn webpack --watch
+```
+
+## Release Build
+```
+$ yarn run build
+```
+
+## lintして修正
+```
+$ yarn lint --fix
 ```
 
 # デバッグ
